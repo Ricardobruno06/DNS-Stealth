@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	
+	<link href="dist/css/confirma.css" rel="stylesheet" type="text/css" />
+  <script src="plugins/sweetalert2-7.28.5/package/dist/sweetalert2.all.min.js"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+<script type="text/javascript">
+
+
+  /**
+ * Source: http://t4t5.github.io/sweetalert/
+ 
+
+$("button").click(function() {
+  $(".sa-success").addClass("hide");
+  setTimeout(function() {
+    $(".sa-success").removeClass("hide");
+  }, 10);
+});*/
+</script>
+
+<style type="text/css">
+  body {
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+}
+</style>
+
+
+</head>
+<body>
+
+	<!--<div class="check_mark">
+  <div class="sa-icon sa-success animate">
+    <span class="sa-line sa-tip animateSuccessTip"></span>
+    <span class="sa-line sa-long animateSuccessLong"></span>
+    <div class="sa-placeholder"></div>
+    <div class="sa-fix"></div>
+  </div>
+</div>
+<center>
+  <button id="restart">Restart Animation</button>
+</center>-->
+
+<input TYPE="BUTTON" NAME="submit" value="Enviar" onclick="button()" >
+
+<button onclick="myFunction()">Try it</button>
+<button onclick="myFunction2()">Try it2</button>
+
+<script>
+function myFunction() {
+    swal(
+  'Good job!',
+  'You clicked the button!',
+  'success'
+)
+}
+</script>
+
+<script type="text/javascript">
+  
+  function myFunction2() {
+    swal({
+  position: 'center',
+  type: 'success',
+  title: 'Feito',
+  showConfirmButton: false,
+  timer: 1500
+
+});
+window.setTimeout("location.href='confirma.php';", 1500);
+}
+</script>
+
+
+<script type="text/javascript">
+  swal(
+  'Good job!',
+  'You clicked the button!',
+  'success'
+)
+</script>
+  
+</body>
+</html>
+
+
+
+
+
