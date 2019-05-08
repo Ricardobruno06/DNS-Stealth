@@ -14,7 +14,11 @@ if(isset($_GET["did"]))
 	deleteFromDB("delete from customer where customer_id = $id");
 	//header("Location: view_customers_admin.php");
 }
+
+//if (validacao($nome, $email, $senha) == true) {
 if(isset($_REQUEST["create_new_customer"]))
+
+
 {
 	if(strlen((string)$_REQUEST["customer_name"])!=0)
 	{
@@ -27,15 +31,26 @@ if(isset($_REQUEST["create_new_customer"]))
 		$idresult = json_decode($idresult, true);
 		$id = $idresult[0]["customer_id"];
 		$id = $id + 1;
+		//insertIntoDB("insert into customer values($id, '$name', '$contact', '$email')");
+		//insertIntoDB("insert into users VALUES($id, 'cos', 'pass', 'active')");
+		//header("Location: view_customers_adm.php");	
+
+		if (emailExiste("SELECT * FROM customer WHERE customer_email = '{$email}'") == true) { 
+			header("Location: view_customers_admin.php");
+		}
+		else{
+
 		insertIntoDB("insert into customer values($id, '$name', '$contact', '$email')");
 		insertIntoDB("insert into users VALUES($id, 'cos', '$pass', 'active')");
-		//header("Location: view_customers_adm.php");		
+				
+		}			
 	}
 	else{
 		header("Location: view_customers_admin.php");
 	}
 	
 }
+//}
 if(isset($_REQUEST["update_customer"]) )
 {
 	if(!isset($_REQUEST["customer_id"]) || strlen((String)$_REQUEST["customer_id"])==0)
@@ -69,6 +84,34 @@ if(isset($_REQUEST["update_customer"]) )
 	updateIntoDB("update customer set customer_name = '$name', customer_contact_no = '$contact', 
 		customer_email = '$email' where customer_id = $id");
 	//header("Location: view_customers_admin.php");
+
+function validacao($nome, $email, $senha)
+{
+	global $erro;
+	$res = true;
+
+	if (empty($nome) == true) {
+		$erro["nome"] = "Nome de usuário vazio.";
+		$res = false;
+	}
+
+	if (empty($email) == true) {
+		$erro["email"] = "E-mail vazio.";
+		$res = false;
+	} else {
+		if (emailExiste($email) == true) {
+			$erro["email"] = "Este e-mail já existe.";
+			$res = false;
+		}
+	}
+
+	if (strlen($senha) < 6) {
+		$erro["senha"] = "Senha deve conter no mínimo 6 caracteres.";
+		$res = false;
+	}
+
+	return $res;
+}
 
 }
 ?>

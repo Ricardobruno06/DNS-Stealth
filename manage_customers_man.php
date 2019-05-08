@@ -28,9 +28,17 @@ if(isset($_REQUEST["create_new_customer"]))
 		$idresult = json_decode($idresult, true);
 		$id = $idresult[0]["customer_id"];
 		$id = $id + 1;
+		
+		if (emailExiste("SELECT * FROM customer WHERE customer_email = '{$email}'") == true) { 
+			header("Location: manage_customers_man.php");
+		}
+		else{
+
 		insertIntoDB("insert into customer values($id, '$name', '$contact', '$email')");
-		insertIntoDB("insert into users VALUES($id, 'cos', '$pass', 'active')");
-		//header("Location: manage_customers_man.php");		
+		insertIntoDB("insert into users VALUES($id, 'cos', 'pass', 'active')");
+		//header("Location: manage_customers_man.php");
+				
+		}		
 	}
 	else{
 		header("Location: manage_customers_man.php");

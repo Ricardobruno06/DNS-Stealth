@@ -18,6 +18,7 @@ if(isset($_GET["did"]))
 	deleteFromDB("delete from users where user_id = $id");
 	//header("Location: manage_managers_adm.php");
 }
+
 if(isset($_REQUEST["create_new_mgr"]))
 {
 	if(strlen((string)$_REQUEST["mgr_name"])!=0)
@@ -34,8 +35,17 @@ if(isset($_REQUEST["create_new_mgr"]))
 		$idresult = json_decode($idresult, true);
 		$id = $idresult[0]["manager_id"];
 		$id = $id + 1;
-		insertIntoDB("insert into manager values ('$id', '$name', '$date', '$salary', '$email', '$contact')");
-		insertIntoDB("insert into users VALUES($id, 'mgr', 'pass', 'active')");
+
+		if (emailExiste("SELECT * FROM manager WHERE manager_email = '{$email}'") == true) { 
+			header("Location: manage_managers_adm.php");
+		}
+		else{
+
+			insertIntoDB("insert into manager values ('$id', '$name', '$date', '$salary', '$email', '$contact')");
+			insertIntoDB("insert into users VALUES($id, 'mgr', 'pass', 'active')");
+				
+		}
+
 
 		//header("Location: confirma.php");		
 	}
@@ -82,6 +92,7 @@ if(isset($_REQUEST["update_mgr"]) )
 
 
 ?>
+
 
 <script>
 function searchTable() {
@@ -201,7 +212,7 @@ function searchTable() {
 	
 		<div class = "left">
 			<table id="tbb">
-				<h2>Grentes</h2>
+				<h2>Gerentes</h2>
 				<th>Gerente ID</th> <th>Nome</th> <th>Data</th> <th>Email</th><th>Apagar</th>
 				<?php 
 					for($i=0;$i<sizeof($result);$i++){

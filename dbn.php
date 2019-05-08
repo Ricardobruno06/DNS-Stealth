@@ -51,4 +51,29 @@ function updateIntoDB($sql)
 	$result = pg_query($conn, $sql)or die(pg_result_error($$conn));
 }
 
+function emailExiste($sql)
+{
+	//global $db;
+	//$tabela = "`usuarios`";
+	//$sql = "SELECT * FROM " .$tabela ." WHERE `email` = '" .$email ."'";
+	#echo $sql; die();
+	$host        = "host = localhost";
+   $port        = "port = 5432";
+   $dbname      = "dbname = ims";
+   $credentials = "user = postgres password=1234";
+
+   $conn = pg_connect( "$host $port $dbname $credentials");
+
+	$res = pg_query($conn, $sql);
+
+	if(pg_num_rows($res)>0){
+		return true;
+	}
+        
+    else {
+        return false;
+    }
+
+}
+
 ?>
