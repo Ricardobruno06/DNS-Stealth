@@ -30,6 +30,13 @@
   }*/
 ?>-->
 
+<?php
+
+session_start();
+
+$errorMsg = $_SESSION['error_msg'];
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -63,7 +70,7 @@
     background-image: url('wbg3.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: 100%;
+    background-size: cover;
     opacity: 0.2;
     filter:alpha(opacity=40);
 }
@@ -91,6 +98,11 @@
               placeholder="Senha" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
+
+          <?php if (! empty($errorMsg)): ?>
+          <div class="alert alert-danger"><?php echo $errorMsg ?></div>
+          <?php endif ?>
+
           <div class="row">
             <div class="col-xs-8">    
               <!--<div class="checkbox icheck">
@@ -99,6 +111,7 @@
                 </label>
               </div>  -->                      
             </div><!-- /.col -->
+
             <div class="col-xs-4">
               <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
             </div><!-- /.col -->
@@ -126,3 +139,5 @@
     </script>
   </body>
 </html>
+
+<?php unset($_SESSION['error_msg']) ?>
