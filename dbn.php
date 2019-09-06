@@ -18,13 +18,10 @@ function getJSONFromDB($sql)
 	// die($sql);
 	$result = pg_query($conn, $sql);
 	$arr = array();
-	echo "<pre>" .print_r($result, true) .PHP_EOL; die;
 	
 	while ($row = pg_fetch_assoc($result)) {
 		$arr[] = $row;
 	}
-
-	echo "ok";
 
 	return json_encode($arr);
 }
