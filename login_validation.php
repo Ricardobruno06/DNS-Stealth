@@ -20,17 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$result = getJSONFromDB($sql);
 	$result = json_decode($result, true);
 
-	echo "<pre>" .var_export($result, true) .PHP_EOL;
-	die();
-
-	# Essa verificação já foi feita pelo próprio Postgres
-	/*if (isset($result[0]["user_id"]) && $result[0]["user_id"] == $username && $result[0]["password"] == $pass) {		
-	}
-	else
-	{
-		header("Location: login.php");
-	}*/
-
 
 	# Verifica o tipo de usuário e redireciona para a área adequada
 
