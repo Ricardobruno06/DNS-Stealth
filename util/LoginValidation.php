@@ -30,11 +30,11 @@ class LoginValidation
 
 	public static function validateUsername(String $username)
 	{
-		return preg_match("/^[1-9]+([0-9]*)$/", $username) ? true : false;
+		return preg_match("/^[1-9]+([0-9]*)$/", $username);
 	}
 
 	public static function validatePassword(String $password)
 	{
-		return preg_match("/^[0-9a-zA-Z]{6,}$/", $password);
+		return preg_match("/[0-9a-zA-Z]{4,}/", $password);
 	}
 }
